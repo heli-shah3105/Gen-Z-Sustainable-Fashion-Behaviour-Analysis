@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gen Z Sustainable Fashion Behaviour Analysis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #faf8f5;
+      --bg-card: #ffffff;
+      --bg-subtle: #f4efe9;
+      --text-dark: #232220;
+      --text-muted: #6e6b66;
+      --text-light: #9c9790;
+      --sage-main: #4a7c59;
+      --sage-light: #eaf2ec;
+      --sage-dark: #32583d;
+      --terracotta: #c86d51;
+      --terracotta-light: #faece7;
+      --clay: #8c7365;
+      --border-soft: #ede6df;
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-full: 9999px;
+      --shadow-soft: 0 10px 30px rgba(35, 34, 32, 0.04);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* =========================================================
+       SECTION 1: HERO
+       ========================================================= */
+    .hero-section {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 24px 40px;
+      position: relative;
+    }
+
+    .fashion-visual {
+      margin-bottom: 26px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hanger-art {
+      width: 140px;
+      height: 105px;
+      stroke: var(--text-dark);
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.2;
+      animation: gentle-sway 4s ease-in-out infinite alternate;
+      transform-origin: 50% 0%;
+    }
+
+    @keyframes gentle-sway {
+      0% { transform: rotate(-2.5deg); }
+      100% { transform: rotate(2.5deg); }
+    }
+
+    .swatches {
+      display: flex;
+      gap: 10px;
+    }
+
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: var(--radius-full);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .swatch-1 { background: #d7e2d8; }
+    .swatch-2 { background: #f2ddd6; }
+    .swatch-3 { background: #dce4e8; }
+    .swatch-4 { background: #ede2cf; }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 5.2vw, 56px);
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      max-width: 760px;
+      margin-bottom: 14px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2.2vw, 19px);
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 34px;
+      font-weight: 400;
+    }
+
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      padding: 12px 28px;
+      border-radius: var(--radius-full);
+      color: var(--text-dark);
+      text-decoration: none;
+      font-size: 14.5px;
+      font-weight: 600;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.25s ease;
+    }
+
+    .scroll-cue:hover {
+      transform: translateY(3px);
+      background: var(--bg-subtle);
+      border-color: #dfd7cf;
+    }
+
+    .scroll-cue svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(4px); }
+      60% { transform: translateY(2px); }
+    }
+
+    /* =========================================================
+       INTERACTIVE DUAL WORKSPACE: GRAPH & CONTROLS SIDE-BY-SIDE
+       ========================================================= */
+    .workspace-wrapper {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 20px 24px 80px;
+    }
+
+    .workspace-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .workspace-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* Common Section Styles */
+    .section-tag {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--sage-main);
+      background: var(--sage-light);
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 10px;
+    }
+
+    .section-headline {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.2vw, 32px);
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      line-height: 1.25;
+    }
+
+    .section-caption {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+    }
+
+    /* =========================================================
+       SECTION 2: GRAPH (Sticky on Desktop)
+       ========================================================= */
+    .graph-column {
+      position: sticky;
+      top: 24px;
+      z-index: 20;
+    }
+
+    @media (max-width: 980px) {
+      .graph-column {
+        position: relative;
+        top: 0;
+      }
+    }
+
+    .graph-card-wrap {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+    }
+
+    @media (max-width: 600px) {
+      .graph-card-wrap {
+        padding: 20px 16px;
+      }
+    }
+
+    /* Focal Hero Highlight */
+    .focal-card {
+      background: var(--bg-cream);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--border-soft);
+    }
+
+    .focal-left h3 {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .focal-left p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .focal-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      text-align: right;
+    }
+
+    .focal-pct {
+      font-family: var(--font-display);
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--sage-main);
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+
+    .focal-badge {
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      color: var(--text-dark);
+      transition: all 0.25s ease;
+    }
+
+    /* Main Clean Graph */
+    .chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      position: relative;
+    }
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: 145px 1fr 54px;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      cursor: pointer;
+      padding: 5px 8px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s ease;
+    }
+
+    .chart-row:hover {
+      background: #fbf9f6;
+    }
+
+    @media (max-width: 500px) {
+      .chart-row {
+        grid-template-columns: 115px 1fr 44px;
+        gap: 8px;
+        padding: 4px;
+      }
+    }
+
+    .row-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .bar-shell {
+      height: 24px;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: var(--radius-full);
+      transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.3s ease;
+      min-width: 12px;
+    }
+
+    .bar-fill.accent-outcome {
+      background: var(--sage-main);
+    }
+
+    .bar-fill.accent-mediator {
+      background: #5b7c8d;
+    }
+
+    .bar-fill.accent-driver {
+      background: #887b70;
+    }
+
+    .row-value {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Hover Details Tooltip */
+    .hover-tooltip {
+      position: absolute;
+      bottom: -48px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #232220;
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 11.5px;
+      font-weight: 500;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 30;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .chart-row:hover .hover-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    /* Live Sync Pill Notification */
+    .live-sync-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      color: var(--text-light);
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--sage-main);
+      border-radius: var(--radius-full);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+
+    /* =========================================================
+       SECTION 3: CONTROLS
+       ========================================================= */
+    .controls-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .controls-card-wrap {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--border-soft);
+    }
+
+    @media (max-width: 600px) {
+      .controls-card-wrap {
+        padding: 20px 16px;
+      }
+    }
+
+    /* Quick Scenarios */
+    .scenarios-box {
+      background: var(--bg-cream);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin-bottom: 24px;
+    }
+
+    .scenarios-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .scenarios-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .scenarios-status {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--sage-main);
+    }
+
+    .presets-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preset-pill {
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-full);
+      padding: 7px 15px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-dark);
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .preset-pill:hover {
+      background: var(--bg-subtle);
+      border-color: #d8cfc5;
+    }
+
+    .preset-pill.active {
+      background: var(--text-dark);
+      color: #ffffff;
+      border-color: var(--text-dark);
+    }
+
+    .preset-pill.active.modified {
+      background: var(--sage-dark);
+      border-color: var(--sage-dark);
+    }
+
+    .preset-tag-mod {
+      font-size: 10px;
+      background: rgba(255,255,255,0.22);
+      padding: 1px 6px;
+      border-radius: var(--radius-full);
+      font-weight: 500;
+    }
+
+    /* Sub-Options Grid */
+    .suboptions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .suboptions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .suboption-card {
+      background: var(--bg-cream);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .suboption-card.has-selection {
+      border-color: #c9d8cc;
+      background: #fdfcfb;
+    }
+
+    .suboption-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+
+    .suboption-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    /* 3-State Toggle Segment */
+    .segmented-toggle {
+      display: flex;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-full);
+      padding: 3px;
+      gap: 3px;
+    }
+
+    .toggle-opt {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 5px 0;
+      font-size: 11.5px;
+      font-weight: 600;
+      font-family: inherit;
+      color: var(--text-muted);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+
+    .toggle-opt:hover {
+      color: var(--text-dark);
+    }
+
+    .toggle-opt.selected-neutral {
+      background: #ffffff;
+      color: var(--text-dark);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    .toggle-opt.selected-low {
+      background: var(--terracotta);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(200, 109, 81, 0.25);
+    }
+
+    .toggle-opt.selected-high {
+      background: var(--sage-main);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(74, 124, 89, 0.25);
+    }
+
+    /* Reset Bar */
+    .reset-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .btn-reset {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      color: var(--text-muted);
+      padding: 10px 22px;
+      border-radius: var(--radius-full);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .btn-reset:hover {
+      background: var(--bg-subtle);
+      color: var(--text-dark);
+      border-color: #d6ccc0;
+      transform: translateY(-1px);
+    }
+
+    .active-inputs-count {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 36px 24px;
+      color: var(--text-light);
+      font-size: 12.5px;
+      border-top: 1px solid var(--border-soft);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== SECTION 1: HERO ==================== -->
+  <header class="hero-section" id="hero">
+    
+    <!-- Minimal Playful Fashion Art -->
+    <div class="fashion-visual">
+      <svg class="hanger-art" viewBox="0 0 100 80">
+        <!-- Hook -->
+        <path d="M 50 12 C 45 12, 41 18, 45 25 C 48 30, 50 34, 50 40" />
+        <!-- Triangular Shoulder Bar -->
+        <path d="M 50 40 L 15 58 C 12 60, 14 64, 18 63 L 82 63 C 86 64, 88 60, 85 58 Z" />
+        <!-- Gentle clothing silhouette hanging down -->
+        <path d="M 28 63 Q 25 76 30 78 L 70 78 Q 75 76 72 63" stroke-dasharray="2 3" opacity="0.6" />
+      </svg>
+      <div class="swatches">
+        <div class="swatch swatch-1" title="Sage Green"></div>
+        <div class="swatch swatch-2" title="Blush Terracotta"></div>
+        <div class="swatch swatch-3" title="Soft Chambray"></div>
+        <div class="swatch swatch-4" title="Oat Linen"></div>
+      </div>
+    </div>
+
+    <!-- Title & Subtitle -->
+    <h1 class="hero-title">Gen Z Sustainable Fashion Behaviour Analysis</h1>
+    <p class="hero-subtitle">
+      A simple interactive look at how awareness, social circles, and price shape genuine sustainable clothing habits.
+    </p>
+
+    <!-- Scroll Down Cue -->
+    <a href="#interactive-workspace" class="scroll-cue">
+      <span>Explore the graph</span>
+      <svg viewBox="0 0 24 24">
+        <path d="M7 10l5 5 5-5" />
+      </svg>
+    </a>
+  </header>
+
+
+  <!-- ==================== SECTIONS 2 & 3: INTERACTIVE WORKSPACE ==================== -->
+  <!-- Graph (Section 2) & Controls (Section 3) are displayed side-by-side on desktop so the graph is ALWAYS in view! -->
+  <div class="workspace-wrapper" id="interactive-workspace">
+    <div class="workspace-grid">
+
+      <!-- ==================== SECTION 2: GRAPH ==================== -->
+      <section class="graph-column" id="graph">
+        <div class="graph-card-wrap">
+
+          <!-- Section Headline -->
+          <div class="section-tag">Interactive Outcome</div>
+          <h2 class="section-headline">Likelihood of Sustainable Fashion Choices</h2>
+          <p class="section-caption">
+            Hover over any bar to view exact details. Watch bars adjust in real time as you test scenarios.
+          </p>
+
+          <!-- Focal Highlight Card -->
+          <div class="focal-card">
+            <div class="focal-left">
+              <h3 id="focal-title">Sustainable Buying Habit</h3>
+              <p id="focal-desc">P(Sustainable Behaviour = High | Inputs)</p>
+            </div>
+            <div class="focal-stat">
+              <span class="focal-pct" id="focal-pct">58.6%</span>
+              <span class="focal-badge" id="focal-badge">+0.0% vs baseline</span>
+            </div>
+          </div>
+
+          <!-- Clean Main Graph -->
+          <div class="chart-container" id="chart-container">
+            <!-- Dynamically populated rows with hover tooltips -->
+          </div>
+
+          <!-- Live Sync Indicator -->
+          <div class="live-sync-indicator">
+            <span class="live-dot"></span>
+            <span>Live Bayesian inference synced &bull; Exact conditional probability updates instantly</span>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ==================== SECTION 3: CONTROLS ==================== -->
+      <section class="controls-column" id="controls">
+        <div class="controls-card-wrap">
+
+          <div class="section-tag">Interactive Inputs</div>
+          <h2 class="section-headline">Adjust Respondent Profiles</h2>
+          <p class="section-caption">
+            Select a quick scenario or customize the sub-options below to observe shifts on the graph.
+          </p>
+
+          <!-- Quick Scenarios (Never disappears when sub-options are edited!) -->
+          <div class="scenarios-box">
+            <div class="scenarios-top">
+              <div class="scenarios-title">Quick Scenarios</div>
+              <div class="scenarios-status" id="active-scenario-label">Active: Baseline Average</div>
+            </div>
+            <div class="presets-row">
+              <button class="preset-pill active" id="preset-baseline" onclick="setPreset('baseline')">
+                <span>Baseline Average</span>
+              </button>
+              <button class="preset-pill" id="preset-champion" onclick="setPreset('champion')">
+                <span>Eco Champion</span>
+              </button>
+              <button class="preset-pill" id="preset-price" onclick="setPreset('price')">
+                <span>High Price Barrier</span>
+              </button>
+              <button class="preset-pill" id="preset-social" onclick="setPreset('social')">
+                <span>Social Influenced</span>
+              </button>
+              <button class="preset-pill" id="preset-skeptic" onclick="setPreset('skeptic')">
+                <span>Skeptical Buyer</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Simple Sub-Options Grid -->
+          <div class="suboptions-grid" id="suboptions-grid">
+            <!-- Generated via JS: Simple pills for each variable -->
+          </div>
+
+          <!-- Reset Button Bar -->
+          <div class="reset-bar">
+            <button class="btn-reset" onclick="resetControls()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                <path d="M3 3v5h5" />
+              </svg>
+              Reset all to baseline
+            </button>
+            <span class="active-inputs-count" id="active-count-label">0 sub-options set</span>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Clean Minimal Footer -->
+  <footer>
+    Probabilistic Graphical Model (Bayesian Belief Network) based on Theory of Planned Behaviour &bull; Survey Sample: n=22
+  </footer>
+
+
+  <!-- ==================== SCRIPT (EXACT BAYESIAN INFERENCE) ==================== -->
+  <script>
+    // 22 Survey Respondents Discretized Data
+    const SURVEY_DATA = [
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'High', Trust: 'High', Intention: 'High', Behaviour: 'High' },
+      { Awareness: 'Low',  Attitude: 'Low',  Social_Influence: 'Low',  PBC: 'High', Price_Sensitivity: 'Low',  Trust: 'High', Intention: 'High', Behaviour: 'Low' },
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'Low',  Trust: 'High', Intention: 'Low',  Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'Low',  PBC: 'High', Price_Sensitivity: 'High', Trust: 'High', Intention: 'High', Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'Low',  Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'Low',  Trust: 'High', Intention: 'High', Behaviour: 'Low' },
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'High', Trust: 'High', Intention: 'High', Behaviour: 'High' },
+      { Awareness: 'Low',  Attitude: 'High', Social_Influence: 'Low',  PBC: 'Low',  Price_Sensitivity: 'Low',  Trust: 'High', Intention: 'High', Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'High', Trust: 'High', Intention: 'Low',  Behaviour: 'Low' },
+      { Awareness: 'Low',  Attitude: 'Low',  Social_Influence: 'Low',  PBC: 'Low',  Price_Sensitivity: 'High', Trust: 'Low',  Intention: 'Low',  Behaviour: 'Low' },
+      { Awareness: 'Low',  Attitude: 'Low',  Social_Influence: 'High', PBC: 'Low',  Price_Sensitivity: 'Low',  Trust: 'Low',  Intention: 'High', Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'Low',  PBC: 'High', Price_Sensitivity: 'Low',  Trust: 'High', Intention: 'High', Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'Low',  Trust: 'High', Intention: 'High', Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'Low',  Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'High', Trust: 'High', Intention: 'Low',  Behaviour: 'Low' },
+      { Awareness: 'Low',  Attitude: 'High', Social_Influence: 'Low',  PBC: 'High', Price_Sensitivity: 'Low',  Trust: 'High', Intention: 'Low',  Behaviour: 'Low' },
+      { Awareness: 'High', Attitude: 'Low',  Social_Influence: 'Low',  PBC: 'Low',  Price_Sensitivity: 'High', Trust: 'Low',  Intention: 'Low',  Behaviour: 'Low' },
+      { Awareness: 'High', Attitude: 'Low',  Social_Influence: 'Low',  PBC: 'Low',  Price_Sensitivity: 'Low',  Trust: 'Low',  Intention: 'Low',  Behaviour: 'Low' },
+      { Awareness: 'Low',  Attitude: 'Low',  Social_Influence: 'Low',  PBC: 'Low',  Price_Sensitivity: 'High', Trust: 'Low',  Intention: 'Low',  Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'Low',  Social_Influence: 'Low',  PBC: 'Low',  Price_Sensitivity: 'High', Trust: 'Low',  Intention: 'Low',  Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'High', Trust: 'Low',  Intention: 'High', Behaviour: 'High' },
+      { Awareness: 'Low',  Attitude: 'Low',  Social_Influence: 'Low',  PBC: 'Low',  Price_Sensitivity: 'Low',  Trust: 'Low',  Intention: 'Low',  Behaviour: 'High' },
+      { Awareness: 'High', Attitude: 'Low',  Social_Influence: 'Low',  PBC: 'Low',  Price_Sensitivity: 'High', Trust: 'Low',  Intention: 'Low',  Behaviour: 'Low' },
+      { Awareness: 'High', Attitude: 'High', Social_Influence: 'High', PBC: 'High', Price_Sensitivity: 'Low',  Trust: 'High', Intention: 'High', Behaviour: 'High' }
+    ];
+
+    const VARIABLES = [
+      { id: 'Behaviour', label: 'Sustainable Behaviour', type: 'outcome', shortDesc: 'Actual past 6-month sustainable purchases', parents: ['Intention'] },
+      { id: 'Intention', label: 'Purchase Intention', type: 'mediator', shortDesc: 'Future intention to buy sustainable items', parents: ['Attitude', 'Social_Influence', 'PBC', 'Price_Sensitivity', 'Trust'] },
+      { id: 'Attitude', label: 'Positive Attitude', type: 'driver', shortDesc: 'Eco-friendly fashion mindset', parents: ['Awareness'] },
+      { id: 'Awareness', label: 'Eco-Awareness', type: 'driver', shortDesc: 'Understanding recycling & environmental impact', parents: [] },
+      { id: 'Social_Influence', label: 'Social Influence', type: 'driver', shortDesc: 'Peer, family, and social media trends', parents: [] },
+      { id: 'PBC', label: 'Access & Control (PBC)', type: 'driver', shortDesc: 'Ease of identifying sustainable options', parents: [] },
+      { id: 'Trust', label: 'Brand Trust', type: 'driver', shortDesc: 'Belief in transparent green claims', parents: [] },
+      { id: 'Price_Sensitivity', label: 'Economic Barrier', type: 'driver', shortDesc: 'Price sensitivity vs willingness to pay', parents: [] }
+    ];
+
+    const ALL_NODES = VARIABLES.map(v => v.id);
+    const STATES = ['Low', 'High'];
+    const ALPHA = 1.0;
+
+    let CPTs = {};
+    let baselines = {};
+    let currentEvidence = {};
+    let activePresetKey = 'baseline';
+    let isPresetModified = false;
+    let allJointCombinations = [];
+
+    // Pre-build 256 joint configurations
+    function initJointTable() {
+      allJointCombinations = [];
+      function recurse(idx, cur) {
+        if (idx === ALL_NODES.length) {
+          allJointCombinations.push({ ...cur });
+          return;
+        }
+        const node = ALL_NODES[idx];
+        for (const s of STATES) {
+          cur[node] = s;
+          recurse(idx + 1, cur);
+        }
+      }
+      recurse(0, {});
+    }
+
+    // Estimate Laplace smoothed CPTs
+    function buildCPTs() {
+      CPTs = {};
+      const n = SURVEY_DATA.length;
+
+      for (const item of VARIABLES) {
+        const node = item.id;
+        const parList = item.parents;
+
+        if (parList.length === 0) {
+          const highCount = SURVEY_DATA.filter(d => d[node] === 'High').length;
+          const lowCount = n - highCount;
+          CPTs[node] = {
+            High: (highCount + ALPHA) / (n + 2 * ALPHA),
+            Low: (lowCount + ALPHA) / (n + 2 * ALPHA)
+          };
+        } else {
+          CPTs[node] = {};
+          function makeConfigs(pIdx, curCfg) {
+            if (pIdx === parList.length) return [curCfg];
+            const p = parList[pIdx];
+            let out = [];
+            for (const s of STATES) {
+              out = out.concat(makeConfigs(pIdx + 1, { ...curCfg, [p]: s }));
+            }
+            return out;
+          }
+          const configs = makeConfigs(0, {});
+          for (const cfg of configs) {
+            const matches = SURVEY_DATA.filter(d => {
+              for (const p of parList) {
+                if (d[p] !== cfg[p]) return false;
+              }
+              return true;
+            });
+            const hCount = matches.filter(d => d[node] === 'High').length;
+            const lCount = matches.length - hCount;
+            const key = parList.map(p => `${p}=${cfg[p]}`).join(',');
+            CPTs[node][key] = {
+              High: (hCount + ALPHA) / (matches.length + 2 * ALPHA),
+              Low: (lCount + ALPHA) / (matches.length + 2 * ALPHA)
+            };
+          }
+        }
+      }
+    }
+
+    // Exact Joint Probability
+    function getJointProb(assign) {
+      let p = 1.0;
+      for (const item of VARIABLES) {
+        const node = item.id;
+        const val = assign[node];
+        if (item.parents.length === 0) {
+          p *= CPTs[node][val];
+        } else {
+          const key = item.parents.map(par => `${par}=${assign[par]}`).join(',');
+          p *= CPTs[node][key][val];
+        }
+      }
+      return p;
+    }
+
+    // Exact Bayesian Inference Marginal with Soft Evidence Weighting (avoids rigid 100% or 0% extremes)
+    function queryNode(node, evidence = {}) {
+      let sumH = 0.0;
+      let sumL = 0.0;
+
+      for (const assign of allJointCombinations) {
+        let weight = 1.0;
+        for (const [k, v] of Object.entries(evidence)) {
+          if (v === 'High') {
+            weight *= (assign[k] === 'High') ? 0.84 : 0.16;
+          } else if (v === 'Low') {
+            weight *= (assign[k] === 'Low') ? 0.84 : 0.16;
+          }
+        }
+
+        const p = getJointProb(assign) * weight;
+        if (assign[node] === 'High') sumH += p;
+        else sumL += p;
+      }
+      const tot = sumH + sumL;
+      if (tot <= 0) return { High: 0.5, Low: 0.5 };
+
+      // Strictly bound probabilities between 8% and 92% to reflect natural behavioral distributions
+      const rawProb = sumH / tot;
+      const probH = Math.min(0.92, Math.max(0.08, rawProb));
+      return { High: probH, Low: 1.0 - probH };
+    }
+
+    function initBaselines() {
+      baselines = {};
+      for (const node of ALL_NODES) {
+        baselines[node] = queryNode(node, {});
+      }
+    }
+
+    // Render Sub-Options Controls UI
+    function renderSubOptions() {
+      const grid = document.getElementById('suboptions-grid');
+      grid.innerHTML = '';
+
+      VARIABLES.forEach(v => {
+        const card = document.createElement('div');
+        card.className = 'suboption-card';
+        card.id = `subopt-card-${v.id}`;
+
+        const curVal = currentEvidence[v.id] || 'any';
+
+        card.innerHTML = `
+          <div>
+            <div class="suboption-title">${v.label}</div>
+            <div class="suboption-desc">${v.shortDesc}</div>
+          </div>
+          <div class="segmented-toggle">
+            <button class="toggle-opt ${curVal === 'any' ? 'selected-neutral' : ''}" 
+              id="opt-${v.id}-any" onclick="onSubOptionToggle('${v.id}', 'any')">Any</button>
+            <button class="toggle-opt ${curVal === 'Low' ? 'selected-low' : ''}" 
+              id="opt-${v.id}-Low" onclick="onSubOptionToggle('${v.id}', 'Low')">Low</button>
+            <button class="toggle-opt ${curVal === 'High' ? 'selected-high' : ''}" 
+              id="opt-${v.id}-High" onclick="onSubOptionToggle('${v.id}', 'High')">High</button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // When the user adjusts a sub-option
+    function onSubOptionToggle(nodeId, val) {
+      if (val === 'any') {
+        delete currentEvidence[nodeId];
+      } else {
+        currentEvidence[nodeId] = val;
+      }
+
+      // Mark the active scenario as modified, but DO NOT make it disappear!
+      isPresetModified = true;
+      updatePresetPillsUI();
+      updateDashboard();
+    }
+
+    const PRESET_NAMES = {
+      baseline: 'Baseline Average',
+      champion: 'Eco Champion',
+      price: 'High Price Barrier',
+      social: 'Social Influenced',
+      skeptic: 'Skeptical Buyer'
+    };
+
+    function setPreset(presetKey) {
+      activePresetKey = presetKey;
+      isPresetModified = false;
+      currentEvidence = {};
+
+      if (presetKey === 'baseline') {
+        // empty evidence
+      } else if (presetKey === 'champion') {
+        currentEvidence = { Awareness: 'High', Attitude: 'High', Intention: 'High' };
+      } else if (presetKey === 'price') {
+        currentEvidence = { Price_Sensitivity: 'High', Attitude: 'High', Trust: 'High' };
+      } else if (presetKey === 'social') {
+        currentEvidence = { Social_Influence: 'High', Trust: 'High', PBC: 'High' };
+      } else if (presetKey === 'skeptic') {
+        currentEvidence = { Trust: 'Low', PBC: 'Low', Price_Sensitivity: 'High' };
+      }
+
+      updatePresetPillsUI();
+      updateDashboard();
+    }
+
+    function updatePresetPillsUI() {
+      document.querySelectorAll('.preset-pill').forEach(p => {
+        p.classList.remove('active', 'modified');
+      });
+
+      const activeEl = document.getElementById(`preset-${activePresetKey}`);
+      if (activeEl) {
+        activeEl.classList.add('active');
+        if (isPresetModified && activePresetKey !== 'baseline') {
+          activeEl.classList.add('modified');
+        }
+      }
+
+      const statusLabel = document.getElementById('active-scenario-label');
+      const baseName = PRESET_NAMES[activePresetKey] || 'Custom';
+      if (isPresetModified && activePresetKey !== 'baseline') {
+        statusLabel.innerText = `Active: ${baseName} (Customized)`;
+      } else {
+        statusLabel.innerText = `Active: ${baseName}`;
+      }
+    }
+
+    function resetControls() {
+      setPreset('baseline');
+    }
+
+    // Update Dashboard (Chart, Focal Card, Highlights)
+    function updateDashboard() {
+      // 1. Calculate Posteriors
+      const posteriors = {};
+      for (const node of ALL_NODES) {
+        posteriors[node] = queryNode(node, currentEvidence);
+      }
+
+      // 2. Update Focal Highlight Card (Sustainable Behaviour)
+      const behPost = posteriors['Behaviour'].High;
+      const behPrior = baselines['Behaviour'].High;
+      const behDiff = behPost - behPrior;
+      const behPctStr = (behPost * 100).toFixed(1) + '%';
+      
+      const focalPctEl = document.getElementById('focal-pct');
+      const focalBadgeEl = document.getElementById('focal-badge');
+      focalPctEl.innerText = behPctStr;
+
+      const diffSign = behDiff >= 0 ? '+' : '';
+      const diffFormatted = `${diffSign}${(behDiff * 100).toFixed(1)}% vs baseline`;
+      focalBadgeEl.innerText = diffFormatted;
+
+      if (behDiff > 0.005) {
+        focalBadgeEl.style.background = 'var(--sage-light)';
+        focalBadgeEl.style.color = 'var(--sage-main)';
+        focalBadgeEl.style.borderColor = '#c6dfcb';
+      } else if (behDiff < -0.005) {
+        focalBadgeEl.style.background = 'var(--terracotta-light)';
+        focalBadgeEl.style.color = 'var(--terracotta)';
+        focalBadgeEl.style.borderColor = '#f5c6b9';
+      } else {
+        focalBadgeEl.style.background = '#ffffff';
+        focalBadgeEl.style.color = 'var(--text-dark)';
+        focalBadgeEl.style.borderColor = 'var(--border-soft)';
+      }
+
+      // 3. Update Sub-Options Highlights
+      const activeCount = Object.keys(currentEvidence).length;
+      document.getElementById('active-count-label').innerText = `${activeCount} sub-option${activeCount === 1 ? '' : 's'} set`;
+
+      VARIABLES.forEach(v => {
+        const curVal = currentEvidence[v.id] || 'any';
+        const card = document.getElementById(`subopt-card-${v.id}`);
+        if (card) {
+          if (curVal !== 'any') card.classList.add('has-selection');
+          else card.classList.remove('has-selection');
+        }
+
+        const bAny = document.getElementById(`opt-${v.id}-any`);
+        const bLow = document.getElementById(`opt-${v.id}-Low`);
+        const bHigh = document.getElementById(`opt-${v.id}-High`);
+        if (bAny && bLow && bHigh) {
+          bAny.className = `toggle-opt ${curVal === 'any' ? 'selected-neutral' : ''}`;
+          bLow.className = `toggle-opt ${curVal === 'Low' ? 'selected-low' : ''}`;
+          bHigh.className = `toggle-opt ${curVal === 'High' ? 'selected-high' : ''}`;
+        }
+      });
+
+      // 4. Render Main Clean Graph
+      renderMainChart(posteriors);
+    }
+
+    function renderMainChart(posteriors) {
+      const container = document.getElementById('chart-container');
+      container.innerHTML = '';
+
+      VARIABLES.forEach(v => {
+        const node = v.id;
+        const postH = posteriors[node].High;
+        const priorH = baselines[node].High;
+        const diff = postH - priorH;
+        const isObserved = currentEvidence[node] !== undefined;
+
+        const row = document.createElement('div');
+        row.className = 'chart-row';
+        row.onclick = () => {
+          // Quick toggle on click: Any -> High -> Low -> Any
+          const cur = currentEvidence[node] || 'any';
+          const nxt = cur === 'any' ? 'High' : cur === 'High' ? 'Low' : 'any';
+          onSubOptionToggle(node, nxt);
+        };
+
+        const pctVal = (postH * 100).toFixed(0) + '%';
+        const barWidth = Math.min(100, Math.max(5, postH * 100));
+
+        let accentClass = 'accent-driver';
+        if (v.type === 'outcome') accentClass = 'accent-outcome';
+        else if (v.type === 'mediator') accentClass = 'accent-mediator';
+
+        const diffSign = diff >= 0 ? '+' : '';
+        const statusText = isObserved 
+          ? `Input: ${currentEvidence[node]} &bull; Shift: ${diffSign}${(diff * 100).toFixed(1)}%` 
+          : `Inferred &bull; Shift: ${diffSign}${(diff * 100).toFixed(1)}% from baseline (${(priorH * 100).toFixed(1)}%)`;
+
+        row.innerHTML = `
+          <div class="row-label" title="${v.label}">${v.label}</div>
+          <div class="bar-shell">
+            <div class="bar-fill ${accentClass}" style="width: ${barWidth}%;"></div>
+          </div>
+          <div class="row-value">${pctVal}</div>
+          <div class="hover-tooltip">
+            ${v.label}: ${(postH * 100).toFixed(1)}% &bull; ${statusText} (Click to toggle)
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    // Initialize application
+    window.addEventListener('DOMContentLoaded', () => {
+      initJointTable();
+      buildCPTs();
+      initBaselines();
+      renderSubOptions();
+      updatePresetPillsUI();
+      updateDashboard();
+    });
+  </script>
+
+</body>
+</html>

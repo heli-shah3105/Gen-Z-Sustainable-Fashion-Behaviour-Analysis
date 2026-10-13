@@ -1,0 +1,79 @@
+================================================================================
+SUSTAINABLE FASHION SURVEY - BAYESIAN NETWORK (PGM) DESIGN & INFERENCE
+================================================================================
+Loaded 22 survey responses.
+
+--- 1. EXPLORATORY DATA ANALYSIS (EDA) ---
+Correlation between Price Sensitivity and Willingness to Pay: 0.0784
+
+Correlation Matrix (Selected Items):
+                         Sustainable_Preference  Intention  Attitude
+Sustainable_Preference                1.000000   0.458978  0.557887
+Intention                             0.458978   1.000000  0.673253
+Attitude                              0.557887   0.673253  1.000000
+
+Price Sensitivity (Original Mean): 3.8181818181818183
+Willingness To Pay (Original Mean): 3.272727272727273
+Merged Economic Barrier Mean: 3.272727272727273
+
+--- Discretized Dataset Summary (n=22) ---
+Node Awareness         : {'High': 15, 'Low': 7}
+Node Attitude          : {'High': 11, 'Low': 11}
+Node Social_Influence  : {'Low': 12, 'High': 10}
+Node PBC               : {'High': 13, 'Low': 9}
+Node Price_Sensitivity : {'High': 11, 'Low': 11}
+Node Trust             : {'High': 13, 'Low': 9}
+Node Intention         : {'High': 11, 'Low': 11}
+Node Behaviour         : {'High': 22}
+
+CPT for Prior Node [Awareness]: P(High)=0.667, P(Low)=0.333
+
+CPT for Conditional Node [Attitude] (Parents: ['Awareness']): 2 parent configurations estimated.
+
+CPT for Prior Node [Social_Influence]: P(High)=0.458, P(Low)=0.542
+
+CPT for Prior Node [PBC]: P(High)=0.583, P(Low)=0.417
+
+CPT for Prior Node [Price_Sensitivity]: P(High)=0.500, P(Low)=0.500
+
+CPT for Prior Node [Trust]: P(High)=0.583, P(Low)=0.417
+
+CPT for Conditional Node [Intention] (Parents: ['Attitude', 'Social_Influence', 'PBC', 'Price_Sensitivity', 'Trust']): 32 parent configurations estimated.
+
+CPT for Conditional Node [Behaviour] (Parents: ['Intention']): 2 parent configurations estimated.
+
+================================================================================
+EXACT PROBABILISTIC INFERENCE QUERIES
+================================================================================
+
+[PRIOR MARGINALS]:
+P(Awareness): {'Awareness=Low': np.float64(0.33333333333333337), 'Awareness=High': np.float64(0.6666666666666666)}
+P(Attitude): {'Attitude=Low': np.float64(0.4967320261437911), 'Attitude=High': np.float64(0.5032679738562089)}
+P(Social_Influence): {'Social_Influence=Low': np.float64(0.5416666666666666), 'Social_Influence=High': np.float64(0.45833333333333337)}
+P(PBC): {'PBC=Low': np.float64(0.4166666666666665), 'PBC=High': np.float64(0.5833333333333335)}
+P(Price_Sensitivity): {'Price_Sensitivity=Low': np.float64(0.49999999999999994), 'Price_Sensitivity=High': np.float64(0.5000000000000001)}
+P(Trust): {'Trust=Low': np.float64(0.4166666666666666), 'Trust=High': np.float64(0.5833333333333335)}
+P(Intention): {'Intention=Low': np.float64(0.47748444992709016), 'Intention=High': np.float64(0.5225155500729098)}
+P(Behaviour): {'Behaviour=Low': np.float64(0.07692307692307689), 'Behaviour=High': np.float64(0.9230769230769231)}
+
+[QUERY 1] P(Behaviour | Awareness=High, Attitude=High, Intention=High):
+  Behaviour=Low = 0.0769 (7.69%)
+  Behaviour=High = 0.9231 (92.31%)
+  [Contrast with Intention=Low]: {'Behaviour=Low': np.float64(0.07692307692307694), 'Behaviour=High': np.float64(0.9230769230769231)}
+
+[QUERY 2] P(Intention | Trust=High, PBC=High, Social_Influence=High):
+  Intention=Low = 0.4497 (44.97%)
+  Intention=High = 0.5503 (55.03%)
+  [Contrast with Trust=Low, PBC=Low, Social_Influence=Low]: {'Intention=Low': np.float64(0.6507936507936508), 'Intention=High': np.float64(0.3492063492063492)}
+
+[QUERY 3 - Diagnostic Reasoning]: Given Behaviour=High:
+  P(Attitude=High | Behaviour=High) = 0.5033
+  P(Awareness=High | Behaviour=High) = 0.6667
+
+[QUERY 4 - Impact of Price Sensitivity on Intention]:
+  P(Intention=High | Price_Barrier=High, Attitude=High, Trust=High) = 0.5794
+  P(Intention=High | Price_Barrier=Low, Attitude=High, Trust=High)  = 0.5644
+
+Generating visual diagrams and plots...
+Saved inference chart to 'bayesian_inference_results.png'.
+Exported results summary to 'inference_results_summary.csv'.

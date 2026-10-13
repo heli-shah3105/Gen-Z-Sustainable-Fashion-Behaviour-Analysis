@@ -1,0 +1,122 @@
+=====================================================================================
+ BAYESIAN NETWORK FOR SUSTAINABLE FASHION SURVEY (PGM DESIGN & INFERENCE) 
+=====================================================================================
+Loaded 22 respondent records.
+
+--- Summary of Raw Behaviour Construct ---
+Behaviour_Raw
+nan          9
+1-2 items    8
+3-5 items    3
+6+ items     2
+Name: count, dtype: int64
+
+=====================================================================================
+ EXPLORATORY DATA ANALYSIS & EXTRA QUESTIONS 
+=====================================================================================
+
+[1] Willingness to Pay (WTP) vs Price Sensitivity:
+    - Price Sensitivity Item: 'A significant price difference discourages me...' (Mean: 3.82)
+    - Willingness to Pay Item: 'I am willing to pay slightly more...' (Mean: 3.27)
+    - Raw Pearson Correlation: r = 0.0784
+    - Directional Reconciliation: Price Sensitivity measures an economic barrier (higher = more discouraged),
+      whereas WTP measures economic tolerance (higher = more willing).
+    - Reverse-coding WTP (6 - WTP) converts it into a cost barrier dimension.
+    - Merged Economic Barrier Index Mean: 3.27
+
+[2] Sustainable Preference Item:
+    - 'When similar options are available, I prefer the more environmentally responsible one.' (Mean: 3.68)
+    - Correlation with Attitude: r = 0.5579
+    - Correlation with Purchase Intention: r = 0.4590
+    - Theoretical Role: Measures self-reported preference (evaluative predisposition). Kept separate from actual behaviour
+      to preserve the well-established 'Attitude-Intention-Behaviour Gap' in TPB literature.
+
+[3] Excluded Variables (Reserved for EDA & Demographics):
+    - Purchase Frequency: {'once every 2-3 months': 9, 'more than 2-3 times a month': 6, 'once a month': 4, 'once every 6-8 months': 3}
+    - Monthly Spending: {'1,001-Rs. 2,000': 7, 'Rs. 2,001-Rs. 4000': 7, 'Rs. 4000- Rs. 6000': 5, 'Rs. 0-Rs. 1,000': 3}
+
+=====================================================================================
+ DISCRETIZATION (BINARY STATES: Low vs High) 
+=====================================================================================
+
+Discretized State Counts:
+  Awareness         : High = 15 ( 68.2%), Low =  7 ( 31.8%)
+  Attitude          : High = 11 ( 50.0%), Low = 11 ( 50.0%)
+  Social_Influence  : High = 10 ( 45.5%), Low = 12 ( 54.5%)
+  PBC               : High = 13 ( 59.1%), Low =  9 ( 40.9%)
+  Price_Sensitivity : High = 11 ( 50.0%), Low = 11 ( 50.0%)
+  Trust             : High = 13 ( 59.1%), Low =  9 ( 40.9%)
+  Intention         : High = 11 ( 50.0%), Low = 11 ( 50.0%)
+  Behaviour         : High = 22 (100.0%), Low =  0 (  0.0%)
+
+=====================================================================================
+ CONDITIONAL PROBABILITY TABLES (CPTs) WITH LAPLACE SMOOTHING (alpha=1) 
+=====================================================================================
+
+[Prior Node] P(Awareness):
+    P(Awareness=High) = 0.6667, P(Awareness=Low) = 0.3333 (Counts: High=15, Low=7)
+
+[Conditional Node] P(Attitude | Awareness) [2 parent states]:
+    P(Attitude=High | Awareness=Low) = 0.3333, P(Low) = 0.6667
+    P(Attitude=High | Awareness=High) = 0.5882, P(Low) = 0.4118
+
+[Prior Node] P(Social_Influence):
+    P(Social_Influence=High) = 0.4583, P(Social_Influence=Low) = 0.5417 (Counts: High=10, Low=12)
+
+[Prior Node] P(PBC):
+    P(PBC=High) = 0.5833, P(PBC=Low) = 0.4167 (Counts: High=13, Low=9)
+
+[Prior Node] P(Price_Sensitivity):
+    P(Price_Sensitivity=High) = 0.5000, P(Price_Sensitivity=Low) = 0.5000 (Counts: High=11, Low=11)
+
+[Prior Node] P(Trust):
+    P(Trust=High) = 0.5833, P(Trust=Low) = 0.4167 (Counts: High=13, Low=9)
+
+[Conditional Node] P(Intention | Attitude, Social_Influence, PBC, Price_Sensitivity, Trust) [32 parent states]:
+
+[Conditional Node] P(Behaviour | Intention) [2 parent states]:
+    P(Behaviour=High | Intention=Low) = 0.9231, P(Low) = 0.0769
+    P(Behaviour=High | Intention=High) = 0.9231, P(Low) = 0.0769
+
+=====================================================================================
+ EXACT BAYESIAN NETWORK INFERENCE RESULTS 
+=====================================================================================
+
+--- 1. Baseline Prior Marginals P(Node = High) ---
+  P(Awareness          = High) = 0.6667 ( 66.7%)
+  P(Attitude           = High) = 0.5033 ( 50.3%)
+  P(Social_Influence   = High) = 0.4583 ( 45.8%)
+  P(PBC                = High) = 0.5833 ( 58.3%)
+  P(Price_Sensitivity  = High) = 0.5000 ( 50.0%)
+  P(Trust              = High) = 0.5833 ( 58.3%)
+  P(Intention          = High) = 0.5225 ( 52.3%)
+  P(Behaviour          = High) = 0.9231 ( 92.3%)
+
+--- 2. Required Query 1: Behaviour Given Full Favourable Cognitive Chain ---
+  Evidence: Awareness = High, Attitude = High, Intention = High
+  --> P(Behaviour = High | Awareness=H, Attitude=H, Intention=H) = 0.9231 (92.31%)
+  --> P(Behaviour = Low  | Awareness=H, Attitude=H, Intention=H) = 0.0769 (7.69%)
+  [Contrast] P(Behaviour = High | Awareness=H, Attitude=H, Intention=LOW) = 0.9231 (92.31%)
+  * Note: Due to d-separation in the DAG, Behaviour is conditionally independent of Awareness and Attitude given Intention.
+
+--- 3. Required Query 2: Purchase Intention Given Favourable Contextual Enablers ---
+  Evidence: Trust = High, PBC = High, Social_Influence = High
+  --> P(Intention = High | Trust=H, PBC=H, Social_Influence=H) = 0.5503 (55.03%)
+  --> P(Intention = Low  | Trust=H, PBC=H, Social_Influence=H) = 0.4497 (44.97%)
+  [Contrast] P(Intention = High | Trust=L, PBC=L, Social_Influence=L) = 0.3492 (34.92%)
+
+--- 4. Scenario 3: Economic Barrier Effect on Purchase Intention ---
+  --> P(Intention = High | Price_Barrier = High, Attitude = High, Trust = High) = 0.5794 (57.94%)
+  --> P(Intention = High | Price_Barrier = Low,  Attitude = High, Trust = High) = 0.5644 (56.44%)
+
+--- 5. Scenario 4: Diagnostic (Abductive / Backward) Reasoning ---
+  --> P(Attitude  = High | Behaviour = High) = 0.5033 vs P(Attitude = High | Behaviour = Low) = 0.5033
+  --> P(Awareness = High | Behaviour = High) = 0.6667 vs P(Awareness = High | Behaviour = Low) = 0.6667
+
+=====================================================================================
+ GENERATING VISUAL PLOTS 
+=====================================================================================
+Saved visualization plot to: bayesian_network_charts.png
+Saved inference results table to: bayesian_inference_results.csv
+
+All Bayesian Network computations completed successfully!

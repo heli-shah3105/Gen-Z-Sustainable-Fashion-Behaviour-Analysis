@@ -1,0 +1,9 @@
+Query,Probability
+"P(Behaviour=High | Awareness=High, Attitude=High, Intention=High)",0.9230769230769231
+"P(Behaviour=High | Awareness=High, Attitude=High, Intention=Low)",0.9230769230769231
+"P(Intention=High | Trust=High, PBC=High, Social_Influence=High)",0.550326797385621
+"P(Intention=High | Trust=Low, PBC=Low, Social_Influence=Low)",0.3492063492063492
+"P(Intention=High | Price_Barrier=Low, Attitude=High, Trust=High)",0.5643518518518519
+"P(Intention=High | Price_Barrier=High, Attitude=High, Trust=High)",0.5793981481481483
+P(Attitude=High | Behaviour=High),0.5032679738562091
+P(Awareness=High | Behaviour=High),0.6666666666666666

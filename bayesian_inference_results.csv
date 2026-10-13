@@ -1,0 +1,11 @@
+Query,P_High,P_Low
+"P(Behaviour=High | Awareness=High, Attitude=High, Intention=High)",0.9230769230769231,0.07692307692307693
+"P(Behaviour=High | Awareness=High, Attitude=High, Intention=Low)",0.9230769230769231,0.07692307692307694
+"P(Intention=High | Trust=High, PBC=High, Social_Influence=High)",0.550326797385621,0.44967320261437904
+"P(Intention=High | Trust=Low, PBC=Low, Social_Influence=Low)",0.3492063492063492,0.6507936507936508
+"P(Intention=High | Price_Barrier=Low, Attitude=High, Trust=High)",0.5643518518518519,0.4356481481481482
+"P(Intention=High | Price_Barrier=High, Attitude=High, Trust=High)",0.5793981481481483,0.42060185185185184
+P(Attitude=High | Behaviour=High),0.5032679738562091,0.49673202614379086
+P(Attitude=High | Behaviour=Low),0.5032679738562091,0.496732026143791
+P(Awareness=High | Behaviour=High),0.6666666666666666,0.3333333333333334
+P(Awareness=High | Behaviour=Low),0.6666666666666666,0.3333333333333333
